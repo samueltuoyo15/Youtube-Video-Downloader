@@ -5,6 +5,7 @@ const App = () => {
   const [error, setError] = useState<string | null>(null)
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     setIsLoading(true)
     setError(null)
 
