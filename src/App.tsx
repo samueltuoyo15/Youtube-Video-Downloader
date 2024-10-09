@@ -16,7 +16,7 @@ const App = () => {
 
     try {
       const downloadLink = document.createElement('a')
-      downloadLink.href = `https://you-tube-video-downloader-iota.vercel.app/download?url=${encodeURIComponent(videoURL)}`
+      downloadLink.href = `https://youtube-video-downloader-three/download?url=${encodeURIComponent(videoURL)}`
       downloadLink.setAttribute('download', '')
       downloadLink.click()
       setIsLoading(false)
