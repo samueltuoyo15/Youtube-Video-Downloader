@@ -16,7 +16,7 @@ const App = () => {
     }
     setAwaitText('Fetching Video Content......')
     try {
-      const response = await fetch(`/download?url=${videoURL}`)
+      const response = await fetch(`window.location.origin/download?url=${videoURL}`)
       if (response.ok) {
       const blob = await response.blob()
       const link = document.createElement('a')
