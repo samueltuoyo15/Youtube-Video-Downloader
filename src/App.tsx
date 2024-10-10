@@ -16,7 +16,7 @@ const App = () => {
 
     try {
       const downloadLink = document.createElement('a')
-      downloadLink.href = `/download?url=${encodeURIComponent(videoURL)}`
+      downloadLink.href = `https://youtube-video-downloader-1-r7hl.onrender.com/download?url=${encodeURIComponent(videoURL)}`
       downloadLink.setAttribute('download', '')
       downloadLink.click()
       setIsLoading(false)
