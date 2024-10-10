@@ -16,7 +16,7 @@ const App = () => {
 
     try {
       const downloadLink = document.createElement('a')
-      downloadLink.href = `https://youtube-video-downloader-three-theta.vercel.app/download?url=${encodeURIComponent(videoURL)}`
+      downloadLink.href = `/download?url=${encodeURIComponent(videoURL)}`
       downloadLink.setAttribute('download', '')
       downloadLink.click()
       setIsLoading(false)
