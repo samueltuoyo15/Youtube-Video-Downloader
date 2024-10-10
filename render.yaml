@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: yt-vd-downloader
+    env: node
+    buildCommand: |
+      npm install && npm run build
+    startCommand: node server.js
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+    autoDeploy: true
+    repo: https://github.com/samueltuoyo15/Youtube-Video-Downloader
+    
