@@ -1,6 +1,7 @@
 import express from 'express'
 import ytdl from '@distube/ytdl-core'
 import path from 'path'
+import cors from 'cors
 import { fileURLToPath } from 'url'
 
 const app = express()
@@ -10,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 app.use(express.static(path.join(__dirname, 'dist')))
-
+app.use(cors())
 app.get('/download', async (req, res) => {
   const videoURL = req.query.url
 
