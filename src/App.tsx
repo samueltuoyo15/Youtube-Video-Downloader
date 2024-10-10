@@ -3,24 +3,34 @@ const App = () => {
   const [videoURL, setVideoURL] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
-
+  const [awaitText, setAwaitText] = useState<string>('')
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
+    setAwaitText('Fetching Video Info.....')
     setError(null)
 
     if (!videoURL.trim()) {
       setIsLoading(false)
       return
     }
-
+    setAwaitText('Fetching Video Content......')
     try {
-      const downloadLink = document.createElement('a')
-      downloadLink.href = `https://youtube-video-downloader-1-r7hl.onrender.com/download?url=${encodeURIComponent(videoURL)}`
-      downloadLink.setAttribute('download', '')
-      downloadLink.click()
+      const response = await fetch(`/download?url=${videoURL}`)
+      if (response.ok) {
+      const blob = await response.blob()
+      const link = document.createElement('a')
+      link.href = window.URL.createObjectURL(blob)
+      link.download = 'video.mp4'
+      link.click()
+      setAwaitText('Done')
       setIsLoading(false)
-    } catch (err) {
+     }else {
+      setError('Failed to download video. Please check the URL.')
+    }
+  }
+  
+     catch(error) {
       setError('Failed to download the video. Please try again.')
       setIsLoading(false)
     }
@@ -47,9 +57,9 @@ const App = () => {
       </form>
 
       {isLoading && (
-        <div className="absolute inset-0 flex justify-center items-center bg-neutral-900 bg-opacity-70">
+        <div className="absolute inset-0 flex flex-col justify-center items-center bg-neutral-900 bg-opacity-70">
           <img src="/spinning-dots.svg" alt="Loading..." className="w-72" />
-          <p className="text-lg">Downloading video...</p>
+          <p className="block text-lg">{awaitText}</p>
         </div>
       )}
 
