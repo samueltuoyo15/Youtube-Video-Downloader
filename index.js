@@ -23,6 +23,7 @@ app.get('/download', async (req, res) => {
     const videoInfo = await ytdl.getInfo(videoURL)
     const title = videoInfo.videoDetails.title.replace(/[\/\\?%*:|"<>]/g, '')
 
+    res.setHeader('Content-Type', 'video/mp4')
     res.setHeader('Content-Disposition', `attachment; filename="${title}.mp4"`)
     ytdl(videoURL, { quality: 'highestvideo', filter: format => format.hasAudio && format.hasVideo }).pipe(res)
   } catch (error) {
