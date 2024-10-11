@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename)
 app.use(express.static(path.join(__dirname, 'dist')))
 
 app.get('/download', async (req, res) => {
-  let videoURL = req.query.url
+  const videoURL = req.query.url
 
   if (!ytdl.validateURL(videoURL)) {
     return res.status(400).send('Invalid YouTube URL')
@@ -23,6 +23,7 @@ app.get('/download', async (req, res) => {
 
     res.setHeader('Content-Type', 'video/mp4')
     res.setHeader('Content-Disposition', `attachment; filename="${title}.mp4"`)
+    console.log(Downloading video:', title)
     ytdl(videoURL, { quality: 'highestvideo', filter: format => format.hasAudio && format.hasVideo }).pipe(res)
   } catch (error) {
     console.error('Error downloading the video:', error)
@@ -37,5 +38,3 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)
 })
-
-export default app
