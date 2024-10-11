@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename)
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(cors())
 app.get('/download', async (req, res) => {
-  const videoURL = req.query.url
+  let videoURL = req.query.url
 
   if (!ytdl.validateURL(videoURL)) {
     return res.status(400).send('Invalid YouTube URL')
