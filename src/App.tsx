@@ -14,30 +14,29 @@ const App = () => {
       setIsLoading(false)
       return
     }
-    setAwaitText('Fetching Video Content......')
     try {
-      const response = await fetch(`window.location.origin/download?url=${videoURL}`)
-      if (response.ok) {
+    const response = await fetch(`/download?url=${videoURL}`)
+    if (response.ok) {
       const blob = await response.blob()
-      const link = document.createElement('a')
-      link.href = window.URL.createObjectURL(blob)
-      link.setAttribute('download', 'true')
-      link.click()
-      setAwaitText('Done')
-      setIsLoading(false)
-     }else {
+      const contentType = response.headers.get('Content-Type')
+      
+      if (contentType && contentType.includes('video/mp4')) {
+        const link = document.createElement('a')
+        link.href = window.URL.createObjectURL(blob)
+        link.setAttribute('download', '')
+        link.click()
+      } else {
+        setError('The response was not a video file. Please check the URL.')
+      }
+    } else {
       setError('Failed to download video. Please check the URL.')
-      console.log(response)
     }
+  } catch (error) {
+    setError('Failed to download the video. Please try again.')
+    setIsLoading(false)
   }
-  
-     catch(error) {
-      setError('Failed to download the video. Please try again.')
-      console.log(error, response)
-       setIsLoading(false)
-    }
-  }
-
+ }
+    
   return (
     <section className="select-none flex justify-center items-center flex-col bg-neutral-900 h-screen w-screen text-white text-center relative">
       <img src="/animate.png" className="w-72" alt="Animation" />
