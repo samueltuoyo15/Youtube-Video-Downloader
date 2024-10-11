@@ -26,7 +26,7 @@ app.get('/download', async (req, res) => {
     console.log('Downloading video:', title)
     ytdl(videoURL, { quality: 'highestvideo', filter: format => format.hasAudio && format.hasVideo }).pipe(res)
   } catch (error) {
-    console.error('Error downloading the video:', error)
+    console.error('Error downloading the video:', error.response?.data, error.message, error)
     res.status(500).send('Error downloading the video')
   }
 })
