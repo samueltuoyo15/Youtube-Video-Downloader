@@ -16,12 +16,12 @@ const App = () => {
     }
     setAwaitText('Fetching Video Content......')
     try {
-      const response = await fetch(`${window.location.origin}/download?url=${videoURL}`)
+      const response = await fetch(`window.location.origin/download?url=${videoURL}`)
       if (response.ok) {
       const blob = await response.blob()
       const link = document.createElement('a')
       link.href = window.URL.createObjectURL(blob)
-      link.download = 'video.mp4'
+      link.setAttribute('download', 'true')
       link.click()
       setAwaitText('Done')
       setIsLoading(false)
