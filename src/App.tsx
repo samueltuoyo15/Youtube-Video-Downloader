@@ -27,12 +27,14 @@ const App = () => {
       setIsLoading(false)
      }else {
       setError('Failed to download video. Please check the URL.')
+      console.log(response)
     }
   }
   
      catch(error) {
       setError('Failed to download the video. Please try again.')
-      setIsLoading(false)
+      console.log(error, response)
+       setIsLoading(false)
     }
   }
 
