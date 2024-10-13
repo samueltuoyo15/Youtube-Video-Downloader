@@ -16,6 +16,6 @@
     "noFallthroughCasesInSwitch": true,
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*.ts", "api/**/*.ts"],
+  "include": ["src/**/*.ts", "./**/*.ts"],
   "exclude": ["node_modules"]
 }
