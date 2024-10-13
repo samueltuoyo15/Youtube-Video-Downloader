@@ -23,7 +23,7 @@ app.get('/download', async (req, res) => {
         'x-rapidapi-key': process.env.API_KEY,
         'x-rapidapi-host': process.env.HOST
     }
-    const response = await axios.request(options)
+    const response = await axios.request(options){
     console.log('API Response:', response.data)
     const videoData = {
       description: response.data.description,
