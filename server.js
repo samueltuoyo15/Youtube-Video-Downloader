@@ -4,7 +4,7 @@ import path from 'path'
 import cors from 'cors'
 import { fileURLToPath } from 'url'
 const app = express()
-const port = process.env.PORT
+const port = process.env.PORT || 3000
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 app.use(cors())
@@ -23,7 +23,7 @@ app.get('/download', async (req, res) => {
         'x-rapidapi-key': process.env.API_KEY,
         'x-rapidapi-host': process.env.HOST
     }
-    const response = await axios.request(options){
+    const response = await axios.request(options)
     console.log('API Response:', response.data)
     const videoData = {
       description: response.data.description,
