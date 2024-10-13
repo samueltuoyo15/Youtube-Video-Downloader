@@ -7,8 +7,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-app.use(cors())
-app.options('*', cors()) 
+app.use(cors()) 
 app.use(express.static(path.join(__dirname, 'dist')))
 app.get('/download', async (req, res) => {
   const videoURL = req.query.url
