@@ -4,10 +4,11 @@ import path from 'path'
 import cors from 'cors'
 import { fileURLToPath } from 'url'
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-app.use(cors()) 
+app.use(cors())
+app.options('*', cors()) 
 app.use(express.static(path.join(__dirname, 'dist')))
 app.get('/download', async (req, res) => {
   const videoURL = req.query.url
@@ -16,12 +17,13 @@ app.get('/download', async (req, res) => {
   try {
     const options = {
       method: 'GET',
-      url: process.env.END_POINT,
+      url: `https://youtube-video-and-shorts-downloader1.p.rapidapi.com/api/getYTVideo`,
       params: { url: videoURL },
       headers: {
-        'x-rapidapi-key': process.env.API_KEY,
-        'x-rapidapi-host': process.env.HOST
-    }
+        'x-rapidapi-key': '866a85da84msh521938f4f02a87dp192e4ejsn5bcd1f2dca8c',
+        'x-rapidapi-host': 'youtube-video-and-shorts-downloader1.p.rapidapi.com'
+      }
+
     const response = await axios.request(options)
     console.log('API Response:', response.data)
     const videoData = {
@@ -39,3 +41,4 @@ app.get('/download', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)
 })
+    
