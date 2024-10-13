@@ -17,13 +17,13 @@ app.get('/download', async (req, res) => {
   try {
     const options = {
       method: 'GET',
-      url: `https://youtube-video-and-shorts-downloader1.p.rapidapi.com/api/getYTVideo`,
+      url: process.env.END_POINT,
       params: { url: videoURL },
       headers: {
-        'x-rapidapi-key': '866a85da84msh521938f4f02a87dp192e4ejsn5bcd1f2dca8c',
-        'x-rapidapi-host': 'youtube-video-and-shorts-downloader1.p.rapidapi.com'
+        'x-rapidapi-key': process.env.API_KEY,
+        'x-rapidapi-host': process.env.HOST
       }
-
+    }
     const response = await axios.request(options)
     console.log('API Response:', response.data)
     const videoData = {
