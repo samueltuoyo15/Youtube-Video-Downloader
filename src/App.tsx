@@ -52,7 +52,8 @@ const App = () => {
   }
 
   return (
-    <section className="select-none flex justify-center items-center flex-col bg-neutral-900 h-screen w-screen text-white text-center relative">
+    <>
+    <section className="select-none flex justify-center items-center flex-col bg-neutral-900 h-screen w-screen text-white text-center mb-8">
       <img src="/animate.png" className="w-72" alt="Animation" />
       <div>
         <h2 className="text-2xl">Download Your Favourite YouTube Video</h2>
@@ -95,6 +96,8 @@ const App = () => {
         </div>
       )}
     </section>
+   <footer className="fixed p-4 text-center bg-neutral-900 text-white text-center bottom-0 w-full">Developed By Samuel Tuoyo With ♥️</footer>
+   </>
   )
 }
 
